@@ -1,0 +1,8 @@
+build
+.deps
+.vscode
+.idea
+example
+.DS_Store
+.cache
+/tools/__pycache__
