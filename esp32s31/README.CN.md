@@ -45,4 +45,4 @@ idf.py -B build-full build
 
 `python tests/run_host_tests.py` 使用 g++ 编译实际协议模块，测试 USB 速度/型号/功能开关组合、输出状态、震动标志、Edge 时序、配置校验和持久化。这些测试不替代 Windows 枚举、游戏 HD 震动、音频、PS Accessories、S3 唤醒和按键的硬件验证。
 
-`main/upstream/` 保存原版适配模块，来源及差异见目录内 README。`app_s31.cpp` 负责蓝牙事件和主循环，`config_s31.cpp` 负责 NVS，`ds5_bridge.c` 负责 Bluedroid，`usb_speed_s31.cpp` 补充高速限定符，`s31_platform.h` 对接 FreeRTOS，`ds5_display.c` 负责圆屏。仓库根 `src/` 的 Pico 工程没有改动。
+`main/upstream/` 保存原版适配模块，来源及差异见目录内 README。`app_s31.cpp` 负责蓝牙事件和主循环，`config_s31.cpp` 负责 NVS，`ds5_bridge.c` 负责 Bluedroid，`usb_speed_s31.cpp` 补充高速限定符，`s31_platform.h` 对接 FreeRTOS，`ds5_display.c` 负责圆屏。本独立仓库不包含 Pico 工程；测试脚本仅在原版源码存在时执行额外的逐字节对照。

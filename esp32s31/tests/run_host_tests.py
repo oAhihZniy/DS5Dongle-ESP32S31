@@ -12,9 +12,11 @@ def report_bytes(path, name):
     source = re.sub(r"/\*.*?\*/|//[^\n]*", "", source, flags=re.S)
     body = re.search(r"\b" + name + r"\[\]\s*=\s*\{(.*?)\};", source, re.S).group(1)
     return bytes(int(x, 0) for x in re.findall(r"0x[0-9a-fA-F]+|\b\d+\b", body))
-for name in ("desc_hid_report_ds", "desc_hid_report_dse", "desc_hid_report_kbd"):
-    assert report_bytes(root.parent / "src/usb_descriptors.cpp", name) == report_bytes(root / "main/upstream/usb_descriptors.cpp", name), name
-print("PASS: DualSense, Edge and keyboard HID report descriptors match upstream byte for byte", flush=True)
+upstream = root.parent / "src/usb_descriptors.cpp"
+if upstream.is_file():
+    for name in ("desc_hid_report_ds", "desc_hid_report_dse", "desc_hid_report_kbd"):
+        assert report_bytes(upstream, name) == report_bytes(root / "main/upstream/usb_descriptors.cpp", name), name
+    print("PASS: DualSense, Edge and keyboard HID report descriptors match upstream byte for byte", flush=True)
 compiler = shutil.which("g++")
 if not compiler:
     raise SystemExit("g++ is required for the host protocol tests")
